@@ -12,6 +12,8 @@ export default defineConfig({
       url: 'http://localhost:3001/health',
       reuseExistingServer: !process.env.CI,
       timeout: 60_000,
+      // The e2e run is deterministic: no real AI call, and only the local web origin may call the API.
+      env: { GROQ_API_KEY: '', CORS_ORIGINS: 'http://localhost:3000' },
     },
     {
       command: 'npm run start --workspace web',
